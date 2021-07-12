@@ -18,8 +18,7 @@ public interface CdnUserRepository extends JpaRepository <CdnUser   , Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE CdnUser a " +
-            "SET a.enabled = TRUE WHERE a.email = ?1")
+    @Query("UPDATE CdnUser a SET a.enabled = TRUE WHERE a.email = ?1")
     int enableCdnUser (String email);
 
 }

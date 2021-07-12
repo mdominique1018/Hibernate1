@@ -102,4 +102,11 @@ public class CdnUser implements UserDetails {
     public boolean isEnabled() {
         return enabled;
     }
+
+    public void setPasswords(String encodedPassword) {
+    }
+
+    public String getEmail() {
+        return null;
+    }
 }

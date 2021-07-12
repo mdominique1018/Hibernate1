@@ -11,12 +11,27 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ *
+ */
 @Configuration
-@AllArgsConstructor
+//@AllArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CdnUserService cdnUserService;
+    public WebSecurityConfig(CdnUserService cdnUserService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.cdnUserService = cdnUserService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
+    public WebSecurityConfig(boolean disableDefaults, CdnUserService cdnUserService,
+            BCryptPasswordEncoder bCryptPasswordEncoder) {
+        super(disableDefaults);
+        this.cdnUserService = cdnUserService;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override

@@ -2,7 +2,6 @@ package com.montreal.codingninja.cdnuser;
 
 import com.montreal.codingninja.registration.token.ConfirmationToken;
 import com.montreal.codingninja.registration.token.ConfirmationTokenService;
-import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 
 public class CdnUserService implements UserDetailsService {
 
@@ -21,7 +20,13 @@ public class CdnUserService implements UserDetailsService {
             "user with email %s not found";
 
     private final CdnUserRepository cdnUserRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    public CdnUserService(CdnUserRepository cdnUserRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
+                ConfirmationTokenService confirmationTokenService) {
+        this.cdnUserRepository = cdnUserRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.confirmationTokenService = confirmationTokenService;
+}
+private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
     @Override
@@ -48,7 +53,7 @@ public class CdnUserService implements UserDetailsService {
         String encodedPassword = bCryptPasswordEncoder
                 .encode(cdnUser.getPassword());
 
-        cdnUser.setPassword(encodedPassword);
+        cdnUser.setPasswords(encodedPassword);
 
         cdnUserRepository.save(cdnUser);
 

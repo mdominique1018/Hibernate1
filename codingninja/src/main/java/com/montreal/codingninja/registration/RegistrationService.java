@@ -8,20 +8,30 @@ import com.montreal.codingninja.email.EmailSender;
 import com.montreal.codingninja.registration.token.ConfirmationToken;
 import com.montreal.codingninja.registration.token.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
 @Service
-@AllArgsConstructor
+//@AllArgsConstructor
 public class RegistrationService {
 
     private final CdnUserService cdnUserService;
+    public RegistrationService(CdnUserService cdnUserService, EmailValidator emailValidator,
+            ConfirmationTokenService confirmationTokenService, EmailSender emailSender) {
+        this.cdnUserService = cdnUserService;
+        this.emailValidator = emailValidator;
+        this.confirmationTokenService = confirmationTokenService;
+        this.emailSender = emailSender;
+    }
+
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 
+    @SneakyThrows
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.
                 test(request.getEmail());
