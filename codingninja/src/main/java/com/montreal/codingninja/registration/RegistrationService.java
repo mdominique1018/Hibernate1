@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 
 @Service
-//@AllArgsConstructor
+@AllArgsConstructor
 public class RegistrationService {
 
     private final CdnUserService cdnUserService;

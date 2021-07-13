@@ -10,6 +10,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
+@Table(name = "ConfirmationToken", indexes = {
+        @Index(name = "idx_confirmationTtken", columnList = "cdn_user_id")
+})
 @Getter
 @Setter
 @NoArgsConstructor

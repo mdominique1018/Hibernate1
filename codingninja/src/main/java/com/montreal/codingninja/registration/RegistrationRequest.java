@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter
 //@AllArgsConstructor
-@EqualsAndHashCode
+//@EqualsAndHashCode
 @ToString
 public class RegistrationRequest {
     private final String firstName;
