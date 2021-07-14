@@ -10,28 +10,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 
 /**
  *
  */
+@Component
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final CdnUserService cdnUserService;
-    public WebSecurityConfig(CdnUserService cdnUserService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.cdnUserService = cdnUserService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
-    public WebSecurityConfig(boolean disableDefaults, CdnUserService cdnUserService,
-            BCryptPasswordEncoder bCryptPasswordEncoder) {
-        super(disableDefaults);
-        this.cdnUserService = cdnUserService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
-
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
@@ -47,10 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
-
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider =

@@ -1,5 +1,4 @@
 package com.montreal.codingninja.registration;
-
 import org.springframework.stereotype.Service;
 
 import java.util.function.Predicate;

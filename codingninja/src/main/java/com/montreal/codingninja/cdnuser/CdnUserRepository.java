@@ -8,17 +8,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-
 @Repository
 @Transactional(readOnly = true)
 
-public interface CdnUserRepository extends JpaRepository <CdnUser   , Long> {
+public interface CdnUserRepository extends JpaRepository<CdnUser   , Long> {
 
     Optional<CdnUser> findByEmail(String email);
 
     @Transactional
     @Modifying
-    @Query("UPDATE CdnUser a SET a.enabled = TRUE WHERE a.email = ?1")
-    int enableCdnUser (String email);
+    @Query("UPDATE CdnUser a " +
+            "SET a.enabled = TRUE WHERE a.email = ?1")
+    int enableCdnUser(String email);
 
 }

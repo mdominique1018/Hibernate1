@@ -1,7 +1,6 @@
 package com.montreal.codingninja.registration.token;
 
 import com.montreal.codingninja.cdnuser.CdnUser;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,14 +8,9 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
-@Table(name = "ConfirmationToken", indexes = {
-        @Index(name = "idx_confirmationTtken", columnList = "cdn_user_id")
-})
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class ConfirmationToken {
 
@@ -59,5 +53,6 @@ public class ConfirmationToken {
         this.createdAt = createdAt;
         this.expiresAt = expiresAt;
         this.cdnUser = cdnUser;
+
     }
 }

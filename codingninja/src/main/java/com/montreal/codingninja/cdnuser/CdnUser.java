@@ -12,7 +12,6 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 
-
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -101,12 +100,5 @@ public class CdnUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return enabled;
-    }
-
-    public void setPasswords(String encodedPassword) {
-    }
-
-    public String getEmail() {
-        return null;
     }
 }

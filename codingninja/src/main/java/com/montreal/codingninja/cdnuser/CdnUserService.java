@@ -21,13 +21,7 @@ public class CdnUserService implements UserDetailsService {
             "user with email %s not found";
 
     private final CdnUserRepository cdnUserRepository;
-    public CdnUserService(CdnUserRepository cdnUserRepository, BCryptPasswordEncoder bCryptPasswordEncoder,
-                ConfirmationTokenService confirmationTokenService) {
-        this.cdnUserRepository = cdnUserRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.confirmationTokenService = confirmationTokenService;
-}
-private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final ConfirmationTokenService confirmationTokenService;
 
     @Override
@@ -54,7 +48,7 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
         String encodedPassword = bCryptPasswordEncoder
                 .encode(cdnUser.getPassword());
 
-        cdnUser.setPasswords(encodedPassword);
+        cdnUser.setPassword(encodedPassword);
 
         cdnUserRepository.save(cdnUser);
 
@@ -71,10 +65,11 @@ private final BCryptPasswordEncoder bCryptPasswordEncoder;
         confirmationTokenService.saveConfirmationToken(
                 confirmationToken);
 
-        //TODO: SEND EMAIL
+        //        TODO: SEND EMAIL
+
         return token;
     }
-            public int enableCdnUser (String email) {
-             return cdnUserRepository.enableCdnUser(email);
-            }
+    public int enableCdnUser(String email) {
+        return cdnUserRepository.enableCdnUser(email);
+    }
 }
